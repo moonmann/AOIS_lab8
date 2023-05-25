@@ -4,14 +4,8 @@ bool Memory::compareWords(vector<int> word1, vector<int> word2)
 {
     for (int i = 0; i < word1.size(); i++)
     {
-        if (word1[i] == 1 && word2[i] == 0)
-        {
-            return true;
-        }
-        else if (word2[i] == 1 && word1[i] == 0)
-        {
-            return false;
-        }
+        if (word1[i] == 1 && word2[i] == 0) return true;
+        else if (word2[i] == 1 && word1[i] == 0)    return false;
     }
     return false;
 }
@@ -197,28 +191,28 @@ void Memory::sum(vector<int> V)
 vector<int> Memory::sumWords(vector<int> word1, vector<int> word2)
 {
     vector<int> S;
-    bool carry = false;
+    int dop_bit = false;
     for (int i = 3; i >= 0; i--)
     {
         int a = word1[i];
         int b = word2[i];
-        int c = carry;
+        int c = dop_bit;
         if (a + b + c == 3){
             S.insert(S.begin(), 1);
         }
         else if (a + b + c == 2){
             S.insert(S.begin(), 0);
-            carry = 1;
+            dop_bit = 1;
         }
         else if (a + b + c == 1){
-            carry = 0;
+            dop_bit = 0;
             S.insert(S.begin(), 1);
         }
         else{
             S.insert(S.begin(), 0);
         }
     }
-    S.insert(S.begin(), carry);
+    S.insert(S.begin(), dop_bit);
     return S;
 }
 
